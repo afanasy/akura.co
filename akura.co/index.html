@@ -2,11 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <style>
       body {
         color: black;
-        opacity: 0.7;
-        font-family: Helvetica Neue;
+        font-family: Helvetica Neue Light;
+        font-size: 20px;
       }
       .background {
         position: absolute;
@@ -22,63 +23,132 @@
       }
       .logo {
         position: absolute;
-        top: 50%;
+        top: 50px;
         left: 50%;
+        margin-left: -50px;      
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        opacity: 0.7;
+      }
+      .logo > div {
+        position: absolute;
+        border-width: 4px;
       }
       .core {
-        width: 120px;
-        height: 120px;
-        margin-top: -60px;
-        margin-left: -60px;
+        width: 24%;
+        height: 24%;
+        margin: auto;
+        top: 38% !important;
+        left: 38% !important;
         background-color: #449d44;
         border-radius: 60px;
       }
       .innerLayer {
-        width: 260px;
-        height: 260px;
-        margin-top: -130px;
-        margin-left: -130px;
+        width: 52%;
+        height: 52%;
+        margin: auto;
+        top: 24% !important;
+        left: 24% !important;
         border: 20px solid #449d44;
         border-radius: 130px;
         box-sizing: border-box; 
       }
       .layer {
-        width: 380px;
-        height: 380px;
-        margin-top: -190px;
-        margin-left: -190px;
+        width: 76%;
+        height: 76%;
+        top: 12%;
+        left: 12%;
         border: 20px solid #449d44;
         border-radius: 190px;
         box-sizing: border-box; 
       }
       .shell {
-        width: 500px;
-        height: 500px;
-        margin-top: -250px;
-        margin-left: -250px;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
         border: 20px solid #449d44;
         border-radius: 250px;
         box-sizing: border-box; 
+      }
+      .content {
+        width: 640px;
+        margin: 200px auto;
+        text-align: center;
+        opacity: 0.7;
+      }
+      .subtitle {
+        font-size: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .footer {
+        position: absolute;
+        right: 0px;
+        bottom: 5px;
+        left: 0px;
+        text-align: center;
+        opacity: 0.9;
+      }
+      a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+      .social {
+        margin-top: 10px;
+      }
+      .fa-circle {
+        color: black;
+      }
+      .fa-stack:hover .fa-circle {
+        color: white;
+        opacity: 0.9;
+      }
+      .fa-stack:hover .icon {
+        color: black;
       }
     </style>
     <script src="jquery.js"></script>
     <script src="jquery.transit.min.js"></script>
     <script>
       $(function () {
+        $('.logo').click(function () {location = '/'})
         $('.background').animate({opacity: 1}, 5000)
         $('.innerLayer,.layer,.shell').transition({scale: 0, opacity: 0, duration: 0}).transition({scale: 1., opacity: 1., duration: 1000}, 1000, 'cubic-bezier(.49,1.6,.41,.95)')
+        $('.logo').mouseenter(function () {
+          $('.innerLayer,.layer,.shell', this).transition({scale: 0.5, opacity: 0, duration: 0}).transition({scale: 1., opacity: 1., duration: 1000}, 1000, 'cubic-bezier(.49,1.6,.41,.95)')
+        })
       })
     </script>
-    <title>Акура</title>
+    <title>Akura</title>
   </head>
   <body>
     <div class="background"></div>
-    <h1>Акура</h1>
-    <strong>создаём приложения и пишем музыку</strong>
-    <p><a href="mailto:hello@akura.co" style="color: inherit;text-decoration: none;">hello@akura.co</a></p>
-    <div class="logo core"></div>
-    <div class="logo innerLayer"></div>
-    <div class="logo layer"></div>
-    <div class="logo shell"></div>
+    <div class="logo">
+      <div class="core"></div>
+      <div class="innerLayer"></div>
+      <div class="layer"></div>
+      <div class="shell"></div>
+    </div>
+    <div class="content">
+      <h1>Akura</h1>
+      <div class="subtitle">We create apps and write music</div>
+      <div class="social">
+        <a class="fa-stack fa-lg" href="http://facebook.com/akura.co">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-facebook fa-stack-1x fa-inverse icon"></i>
+        </a>
+        <a class="fa-stack fa-lg" href="http://vk.com/akura.company">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-vk fa-stack-1x fa-inverse icon"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer">
+      <a class="email" href="mailto:hello@akura.co">hello@akura.co</a>
+    </div>
   </body>
 </html>
