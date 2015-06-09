@@ -116,7 +116,7 @@
     <script>
       $(function () {
         $('.logo').click(function () {location = '/'})
-        $('.background').animate({opacity: 1}, 5000)
+        $('<img>').on('load', function () {$('.background').animate({opacity: 1}, 5000)}).attr('src', 'background.jpg')
         $('.innerLayer,.layer,.shell').transition({scale: 0, opacity: 0, duration: 0}).transition({scale: 1., opacity: 1., duration: 1000}, 1000, 'cubic-bezier(.49,1.6,.41,.95)')
         $('.logo').mouseenter(function () {
           $('.innerLayer,.layer,.shell', this).transition({scale: 0.5, opacity: 0, duration: 0}).transition({scale: 1., opacity: 1., duration: 1000}, 1000, 'cubic-bezier(.49,1.6,.41,.95)')
