@@ -5,9 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "express": "4.12.4",
-    "http-proxy": "1.11.1",
     "underscore": "1.8.3",
-    "vhost": "3.0.0"
+    "vhost": "3.0.0",
+    "stebeneva.ru": "akura-co/stebeneva.ru#nodejs"
   },
   "devDependencies": {},
   "scripts": {
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/afanasy/akura.co"
+    "url": "https://github.com/akura-co/akura.co"
   },
-  "author": "Afanasy Kurakin",
+  "author": "Afanasii Kurakin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/afanasy/akura.co/issues"
+    "url": "https://github.com/akura-co/akura.co/issues"
   },
-  "homepage": "https://github.com/afanasy/akura.co",
+  "homepage": "https://github.com/akura-co/akura.co",
   "engines": {
     "node": "0.12.4"
   }
