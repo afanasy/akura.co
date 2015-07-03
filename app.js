@@ -4,10 +4,14 @@ var
   http = require('http'),
   https = require('https'),
   express = require('express'),
+  bodyParser = require('body-parser'),
   vhost = require('vhost'),
   app = express()
 
 process.env.HOME = '/home/ubuntu'
+app.
+  use(bodyParser.json()).
+  use(bodyParser.urlencoded({extended: true}))
 app.use(function (req, res, next) {
   if (req.hostname == 'akura.co') {
     if (!req.secure)
@@ -21,6 +25,8 @@ _.each(['akura.co', 'afanasy.com', 'ysanafa.com', 'fanafan.us', 'fanafan.co', 's
     return app.use(vhost(domain, require(domain)))
   app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))  
 })
+
+app.use('/telegram/quoteBot/hook', require(process.env.HOME + '/quoteBot/app.js')())
 
 http.createServer(app).listen(80)
 https.createServer({
