@@ -6,12 +6,14 @@ var
   express = require('express'),
   bodyParser = require('body-parser'),
   vhost = require('vhost'),
+  api = require('./api'),
   app = express()
 
 process.env.HOME = '/home/ubuntu'
 app.
   use(bodyParser.json()).
   use(bodyParser.urlencoded({extended: true}))
+app.use(api)
 app.use(function (req, res, next) {
   if (req.hostname == 'akura.co') {
     if (!req.secure)
@@ -23,7 +25,7 @@ app.use(function (req, res, next) {
 _.each(['akura.co', 'afanasy.com', 'ysanafa.com', 'fanafan.us', 'fanafan.co', 'stebeneva.ru'], function (domain) {
   if (domain == 'stebeneva.ru')
     return app.use(vhost(domain, require(domain)))
-  app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))  
+  app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))
 })
 
 app.use('/telegram/quoteBot/hook', require(process.env.HOME + '/quoteBot/app.js')())
