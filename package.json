@@ -8,7 +8,7 @@
     "body-parser": "1.13.1",
     "underscore": "1.8.3",
     "vhost": "3.0.0",
-    "stebeneva.ru": "akura-co/stebeneva.ru#nodejs"
+    "stebeneva.ru": "akura-co/stebeneva.ru"
   },
   "devDependencies": {},
   "scripts": {
