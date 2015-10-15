@@ -2,6 +2,7 @@
   var
     AkuraPrototype = {
       action: action,
+      login: login,
       hosts: hosts,
       call: call,
     },
@@ -31,12 +32,16 @@
         for (var action in oActions) {
           if (oActions.hasOwnProperty(action)) {
             _this[action] = function (_done) {
-              _this.call(actio, _done)
+              _this.call(action, _done)
             }
           }
         }
         done(null, oActions)
       })
+    }
+
+    function login(credentials, done) {
+      return this.call({ url: 'login', method: 'post'}, credentials, done)
     }
 
     function hosts(done) {
