@@ -32,7 +32,7 @@ describe('Server', function () {
     })
   })
   describe('using client module', function () {
-    it('returns action lists via action method', function (done) {
+    it('returns action lists via `action` method', function (done) {
       client.action(function (err, data) {
         if (err) return done(err)
         expect(data).to.eql(expected)
@@ -55,7 +55,7 @@ describe('Server', function () {
     })
   })
   describe('test another server', function () {
-    it('returns action lists via action method', function (done) {
+    it('returns action lists via `action` method to client2', function (done) {
       client2.action(function (err, data) {
         if (err) return done(err)
         expect(data).to.eql(expected)
@@ -63,8 +63,9 @@ describe('Server', function () {
       })
     })
   })
-  describe('add all available call after calling `action`', function () {
-    it('returns action lists via action method', function (done) {
+  describe('add all available calls after calling `action`', function () {
+    it('returns action lists via `action` method and attaches available calls ' +
+      'to client', function (done) {
       client.action(function (err, data) {
         if (err) return done(err)
         expect(data).to.eql(expected)

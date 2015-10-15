@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
   next()
 })
 _.each(['akura.co', 'afanasy.com', 'ysanafa.com', 'fanafan.us', 'fanafan.co', 'stebeneva.ru'], function (domain) {
-  if (domain == 'stebeneva.ru')
+  if (['stebeneva.ru', 'afanasy.com'].indexOf(domain) > -1)
     return app.use(vhost(domain, require(domain)))
   app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))
 })

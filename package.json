@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "afanasy.com": "raabbajam/afanasy.com",
     "body-parser": "1.13.1",
     "express": "4.12.4",
     "stebeneva.ru": "akura-co/stebeneva.ru",
