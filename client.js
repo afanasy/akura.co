@@ -13,12 +13,12 @@
     },
     root = this,
     $ = root.jQuery,
-    has_require = typeof require !== 'undefined'
+    hasRequire = typeof require !== 'undefined'
 
     Akura.prototype = AkuraPrototype
 
     if (typeof $ === 'undefined') {
-      if (has_require) {
+      if (hasRequire) {
         $ = require('request')
       }
     }
@@ -39,7 +39,7 @@
         method = opts.method || 'get',
         err,
         data
-      if (has_require) {
+      if (hasRequire) {
         // for NPM request
         opts = {
           url: url,
@@ -55,7 +55,7 @@
         }
       }
       $[method](opts, function () {
-        if (has_require) {
+        if (hasRequire) {
           // if using request module, data is third arguments
           try {
             err = arguments[0]
