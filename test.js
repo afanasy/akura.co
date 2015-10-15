@@ -9,7 +9,10 @@ var
   server
 
 describe('Server', function () {
-  var expected = { create: true, read: true, update: true, delete: true }
+  var expected = {
+    actions: { create: true, read: true, update: true, delete: true },
+    hosts: [ "akura.co", "afanasy.com", "ysanafa.com", "fanafan.us", "fanafan.co", "stebeneva.ru" ]
+  }
 
   beforeEach(function () {
     server = api.listen(api.get('port') || 3000)
@@ -22,34 +25,55 @@ describe('Server', function () {
       request(server).
         get('/action').
         expect('Content-Type', /json/).
-        expect(200, expected, done)
+        expect(200, expected.actions, done)
     })
     it('returns action lists via request POST', function (done) {
       request(server).
         post('/action').
         expect('Content-Type', /json/).
-        expect(200, expected, done)
+        expect(200, expected.actions, done)
+    })
+    it('returns host lists via request GET', function (done) {
+      request(server).
+        get('/hosts').
+        expect('Content-Type', /json/).
+        expect(200, [
+          "akura.co",
+          "afanasy.com",
+          "ysanafa.com",
+          "fanafan.us",
+          "fanafan.co",
+          "stebeneva.ru"
+        ]
+, done)
     })
   })
   describe('using client module', function () {
     it('returns action lists via `action` method', function (done) {
       client.action(function (err, data) {
         if (err) return done(err)
-        expect(data).to.eql(expected)
+        expect(data).to.eql(expected.actions)
         done()
       })
     })
     it('returns action lists via call method (test GET)', function (done) {
       client.call('action', function (err, data) {
         if (err) return done(err)
-        expect(data).to.eql(expected)
+        expect(data).to.eql(expected.actions)
         done()
       })
     })
     it('returns action lists via call method (test POST)', function (done) {
       client.call({url: 'action', method: 'post'}, function (err, data) {
         if (err) return done(err)
-        expect(data).to.eql(expected)
+        expect(data).to.eql(expected.actions)
+        done()
+      })
+    })
+    it('returns host lists via `hosts` method', function (done) {
+      client.hosts(function (err, hosts) {
+        if (err) return done(err)
+        expect(hosts).to.eql(expected.hosts)
         done()
       })
     })
@@ -58,7 +82,7 @@ describe('Server', function () {
     it('returns action lists via `action` method to client2', function (done) {
       client2.action(function (err, data) {
         if (err) return done(err)
-        expect(data).to.eql(expected)
+        expect(data).to.eql(expected.actions)
         done()
       })
     })
@@ -68,7 +92,7 @@ describe('Server', function () {
       'to client', function (done) {
       client.action(function (err, data) {
         if (err) return done(err)
-        expect(data).to.eql(expected)
+        expect(data).to.eql(expected.actions)
         expect(client.create).to.be.ok()
         expect(client.read).to.be.ok()
         expect(client.update).to.be.ok()

@@ -2,6 +2,7 @@
   var
     AkuraPrototype = {
       action: action,
+      hosts: hosts,
       call: call,
     },
     Akura = function (opts) {
@@ -36,6 +37,10 @@
         }
         done(null, oActions)
       })
+    }
+
+    function hosts(done) {
+      return this.call('hosts', done)
     }
 
     function call (opts, data, done) {
