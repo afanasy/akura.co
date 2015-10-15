@@ -24,7 +24,18 @@
     }
 
     function action (done) {
-      this.call('action', done)
+      var _this = this
+      _this.call('action', function (err, oActions) {
+        if (err) return done(err);
+        for (var action in oActions) {
+          if (oActions.hasOwnProperty(action)) {
+            _this[action] = function (_done) {
+              _this.call(actio, _done)
+            }
+          }
+        }
+        done(null, oActions)
+      })
     }
 
     function call (opts, data, done) {

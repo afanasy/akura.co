@@ -5,8 +5,6 @@ var
 
 app.
   set('port', process.env.PORT || 3000).
-  all('/action', action)
-
-function action (req, res) {
-  return res.json(config)
-}
+  all('/action', function (req, res) {
+    return res.json(config)
+  })

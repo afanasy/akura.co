@@ -63,4 +63,17 @@ describe('Server', function () {
       })
     })
   })
+  describe('add all available call after calling `action`', function () {
+    it('returns action lists via action method', function (done) {
+      client.action(function (err, data) {
+        if (err) return done(err)
+        expect(data).to.eql(expected)
+        expect(client.create).to.be.ok()
+        expect(client.read).to.be.ok()
+        expect(client.update).to.be.ok()
+        expect(client.delete).to.be.ok()
+        done()
+      })
+    })
+  })
 })
