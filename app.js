@@ -6,27 +6,45 @@ var
   express = require('express'),
   bodyParser = require('body-parser'),
   vhost = require('vhost'),
+  hosts = require('./vhost'),
+  api = require('./api'),
   app = express()
 
+// collect aliases
+hosts = hosts.reduce(function (hosts, host) {
+  var alias
+  try {
+    alias = require(host + '/alias')
+  } catch (e) {
+    alias = []
+  }
+  [host].concat(alias).forEach(function (name) {
+    if (!hosts[name]) {
+      hosts[name] = host
+    }
+  })
+  return hosts
+}, {})
 process.env.HOME = '/home/ubuntu'
 app.
   use(bodyParser.json()).
-  use(bodyParser.urlencoded({extended: true}))
-app.use(function (req, res, next) {
-  if (req.hostname == 'akura.co') {
-    if (!req.secure)
-      return res.redirect('https://' + req.hostname + req.url)
-    res.set('Strict-Transport-Security', 'max-age=86400')
-  }
-  next()
-})
-_.each(['akura.co', 'afanasy.com', 'ysanafa.com', 'fanafan.us', 'fanafan.co', 'stebeneva.ru'], function (domain) {
-  if (domain == 'stebeneva.ru')
-    return app.use(vhost(domain, require(domain)))
-  app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))  
-})
+  use(bodyParser.urlencoded({extended: true})).
+  use(api).
+  use(function (req, res, next) {
+    if (req.hostname == 'akura.co') {
+      if (!req.secure)
+        return res.redirect('https://' + req.hostname + req.url)
+      res.set('Strict-Transport-Security', 'max-age=86400')
+    }
+    next()
+  }).
+  use('/telegram/quoteBot/hook', require(process.env.HOME + '/quoteBot/app.js')())
 
-app.use('/telegram/quoteBot/hook', require(process.env.HOME + '/quoteBot/app.js')())
+_.each(hosts, function (domain, repo) {
+  if (['akura.co'].indexOf(domain) > -1)
+    return app.use(vhost(domain, express().use(express.static(__dirname + '/' + domain))))
+  return app.use(vhost(domain, require(domain)))
+})
 
 http.createServer(app).listen(80)
 https.createServer({
