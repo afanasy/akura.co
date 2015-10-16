@@ -37,7 +37,7 @@ app.
       res.set('Strict-Transport-Security', 'max-age=86400')
     }
     next()
-  })
+  }).
   use('/telegram/quoteBot/hook', require(process.env.HOME + '/quoteBot/app.js')())
 
 _.each(hosts, function (domain, repo) {

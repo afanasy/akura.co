@@ -6,7 +6,7 @@ var
   client = akura,
   client2 = new Akura({url: 'http://kat.local:3000'}), // my local server
   api = require('./api'),
-  server = supertest.agent(api);
+  server = supertest.agent(api)
 
 describe('Server', function () {
   var expected = {
