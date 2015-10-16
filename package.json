@@ -12,7 +12,7 @@
     "express-session": "^1.11.3",
     "fanafan.co": "^1.0.0",
     "stebeneva.ru": "^1.0.0",
-    "underscore": "1.8.3",
+    "underscore": "^1.8.3",
     "vhost": "3.0.0"
   },
   "devDependencies": {

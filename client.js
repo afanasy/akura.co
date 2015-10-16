@@ -1,5 +1,6 @@
 (function () {
   var
+    _ = require('underscore'),
     AkuraPrototype = {
       action: action,
       login: login,
@@ -26,16 +27,14 @@
     }
 
     function action (done) {
-      var _this = this
-      _this.call('action', function (err, oActions) {
-        if (err) return done(err);
-        for (var action in oActions) {
-          if (oActions.hasOwnProperty(action)) {
-            _this[action] = function (_done) {
-              _this.call(action, _done)
-            }
+      var self = this
+      self.call('action', function (err, oActions) {
+        if (err) return done(err)
+        _.each(oActions, function (action) {
+          self[action] = function (done) {
+            self.call(action, done)
           }
-        }
+        })
         done(null, oActions)
       })
     }
@@ -105,4 +104,4 @@
       root.Akura = Akura
     }
 
-}).call(this);
+}).call(this)
