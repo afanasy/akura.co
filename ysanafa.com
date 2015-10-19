@@ -1,1 +1,0 @@
-afanasy.com
