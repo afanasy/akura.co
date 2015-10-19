@@ -1,6 +1,8 @@
 var
   express = require('express'),
+  api = require('./api'),
   app = module.exports = express()
 
 app.
-  use(express.static('public'))
+  use(api).
+  use(express.static(__dirname + '/public'))
