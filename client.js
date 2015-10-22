@@ -4,7 +4,6 @@
     AkuraPrototype = {
       action: action,
       login: login,
-      vhost: vhost,
       call: call,
     },
     Akura = function (opts) {
@@ -39,12 +38,8 @@
       })
     }
 
-    function login(credentials, done) {
+    function login (credentials, done) {
       return this.call({ url: 'login', method: 'post'}, credentials, done)
-    }
-
-    function vhost(done) {
-      return this.call('vhost', done)
     }
 
     function call (opts, data, done) {

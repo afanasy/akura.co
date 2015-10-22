@@ -31,7 +31,6 @@ describe('test api', function () {
   var server = supertest.agent(api)
   var expected = {
     actions: { create: true, read: true, update: true, delete: true },
-    vhost: [ "akura.co", "afanasy.com", "fanafan.co", "stebeneva.ru" ],
     login: {
       error: false,
       message: 'Logging in successfully.',
@@ -53,12 +52,6 @@ describe('test api', function () {
         post('/action').
         expect('Content-Type', /json/).
         expect(200, expected.actions, done)
-    })
-    it('returns host lists via request GET', function (done) {
-      server.
-        get('/vhost').
-        expect('Content-Type', /json/).
-        expect(200, expected.vhost , done)
     })
     it('access restricted page without logging in', function (done) {
       server.
@@ -102,13 +95,6 @@ describe('test api', function () {
       client.call({url: 'action', method: 'post'}, function (err, data) {
         if (err) return done(err)
         expect(data).to.eql(expected.actions)
-        done()
-      })
-    })
-    it('returns host lists via `vhost` method', function (done) {
-      client.vhost(function (err, vhost) {
-        if (err) return done(err)
-        expect(vhost).to.eql(expected.vhost)
         done()
       })
     })

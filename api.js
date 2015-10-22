@@ -7,7 +7,6 @@ var
   dbConfig = {host: 'localhost', user: 'root', password: '', database : 'akura', table: 'user'},
   db = db3.connect(dbConfig)
   config = require('./config'),
-  vhost = require('./vhost'),
   app = module.exports = express()
 
 app.
@@ -49,9 +48,6 @@ app.
       })
     })
 
-  }).
-  get('/vhost', function (req, res) {
-    return res.json(vhost)
   }).
   get('/home', function (req, res) {
     var output
