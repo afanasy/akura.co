@@ -6,7 +6,7 @@ var
   app = module.exports = express()
 
 app.
-  use(api).
+  use(hsts({maxAge: 86400})).
+  use(express.static(__dirname + '/public')).
   use('/telegram/quoteBot/hook', quoteBot()).
-  use(hsts({ maxAge: 86400 })).
-  use(express.static(__dirname + '/public'))
+  use(api)
