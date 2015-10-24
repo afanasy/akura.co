@@ -10,20 +10,20 @@
     "type": "git",
     "url": "https://github.com/akura-co/akura.co"
   },
-  "author": "Afanasii Kurakin",
-  "license": "ISC",
+  "author": "Afanasii Kurakin <afanasii@akura.co>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/akura-co/akura.co/issues"
   },
   "homepage": "https://github.com/akura-co/akura.co",
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcrypt": "0.8.5",
     "body-parser": "1.13.1",
-    "db3": "^2.0.1",
-    "express": "^4.13.3",
-    "express-session": "^1.11.3",
-    "hsts": "^0.2.0",
-    "quoteBot": "github:akura-co/quote-bot"
+    "db3": "2.0.1",
+    "express": "4.13.3",
+    "express-session": "1.11.3",
+    "hsts": "0.2.0",
+    "quote-bot": "akura-co/quote-bot"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",

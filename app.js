@@ -1,7 +1,7 @@
 var
   express = require('express'),
   hsts = require('hsts'),
-  quoteBot = require('quoteBot'),
+  quoteBot = require('quote-bot'),
   api = require('./api'),
   app = module.exports = express()
 
