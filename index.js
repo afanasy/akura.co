@@ -16,4 +16,4 @@ app.use(
 )
 
 app.use('/telegram/quoteBot/hook', quoteBot())
-app.use('/telegram/quoteBot/hook', podskazkaBot())
+app.use('/telegram/podskazkaBot/hook', podskazkaBot())
