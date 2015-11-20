@@ -21,7 +21,8 @@
     "express": "4.13.3",
     "express-session": "1.11.3",
     "hsts": "0.2.0",
-    "quote-bot": "akura-co/quote-bot"
+    "quote-bot": "0.0.2",
+    "podskazka-bot": "1.1.0"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
