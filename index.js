@@ -4,6 +4,7 @@ var
   bodyParser = require('body-parser'),
   quoteBot = require('quote-bot'),
   podskazkaBot = require('podskazka-bot'),
+  hkdBot = require('hkd-bot'),
   api = require('./api'),
   app = module.exports = express()
 
@@ -17,3 +18,4 @@ app.use(
 
 app.use('/telegram/quoteBot/hook', quoteBot())
 app.use('/telegram/podskazkaBot/hook', podskazkaBot())
+app.use('/telegram/hkdBot/hook', hkdBot())
