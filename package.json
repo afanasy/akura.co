@@ -1,6 +1,6 @@
 {
   "name": "akura.co",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
@@ -23,7 +23,8 @@
     "hsts": "0.2.0",
     "quote-bot": "0.0.2",
     "podskazka-bot": "1.1.5",
-    "hkd-bot": "0.0.3"
+    "hkd-bot": "0.0.3",
+    "pogovorka-bot": "0.0.2"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
