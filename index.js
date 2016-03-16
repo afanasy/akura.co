@@ -11,7 +11,7 @@ var
   app = module.exports = express()
 
 app.use(
-  forceDomain({hostname: 'akura.co'}),
+  forceDomain({hostname: 'akura.co', protocol: 'https'}),
   hsts({maxAge: 86400}),
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
