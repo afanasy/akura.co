@@ -1,11 +1,8 @@
 var
+  _ = require('underscore'),
   express = require('express'),
   hsts = require('hsts'),
   bodyParser = require('body-parser'),
-  quoteBot = require('quote-bot'),
-  podskazkaBot = require('podskazka-bot'),
-  hkdBot = require('hkd-bot'),
-  pogovorkaBot = require('pogovorka-bot'),
   forceDomain = require('forcedomain'),
   api = require('./api'),
   app = module.exports = express()
@@ -19,7 +16,6 @@ app.use(
   api
 )
 
-app.use('/telegram/quoteBot/hook', quoteBot())
-app.use('/telegram/podskazkaBot/hook', podskazkaBot())
-app.use('/telegram/hkdBot/hook', hkdBot())
-app.use('/telegram/pogovorkaBot/hook', pogovorkaBot())
+_.each(require('solid-config').bot, function (bot) {
+  app.use('/telegram/' + bot + '/hook', require('../../' + bot)())
+})
