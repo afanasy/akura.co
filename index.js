@@ -1,14 +1,14 @@
 var
+  _ = require('underscore'),
   express = require('express'),
   hsts = require('hsts'),
   bodyParser = require('body-parser'),
-  quoteBot = require('quote-bot'),
-  podskazkaBot = require('podskazka-bot'),
-  hkdBot = require('hkd-bot'),
+  forceDomain = require('forcedomain'),
   api = require('./api'),
   app = module.exports = express()
 
 app.use(
+  forceDomain({hostname: 'akura.co', protocol: 'https'}),
   hsts({maxAge: 86400}),
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
@@ -16,6 +16,6 @@ app.use(
   api
 )
 
-app.use('/telegram/quoteBot/hook', quoteBot())
-app.use('/telegram/podskazkaBot/hook', podskazkaBot())
-app.use('/telegram/hkdBot/hook', hkdBot())
+_.each(require('solid-config').bot, function (bot) {
+  app.use('/telegram/' + bot + '/hook', require('../../' + bot)())
+})
