@@ -177,6 +177,8 @@
           rotation += .001
           camera.rotation.z = rotation
           material.size += ((200 * mouseX / width) - material.size) * 0.1
+          material.size = Math.max(material.size, 0)
+          material.size = Math.min(material.size, 50)
           renderer.render(scene, camera)
         }
         animate()
