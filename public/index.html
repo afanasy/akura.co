@@ -136,7 +136,7 @@
         renderer.setPixelRatio(window.devicePixelRatio)
 
         $(window).
-          resize(function () {
+          on('resize orientationchange', function () {
             width = $('body')[0].scrollWidth
             height = $('body')[0].scrollHeight
             var fullHeight = 2 * (height - top)
@@ -158,14 +158,14 @@
           on('touchstart', function (e) {
             if (!e.originalEvent.touches.length)
               return
-            e.preventDefault()
+            //e.preventDefault()
             mouseX = e.originalEvent.touches[0].pageX - (width / 2)
             mouseY = e.originalEvent.touches[0].pageY - (height / 2)
           }).
           on('touchmove', function (e) {
             if (!e.originalEvent.touches.length)
               return
-            e.preventDefault()
+            //e.preventDefault()
             mouseX = e.originalEvent.touches[0].pageX - (width / 2)
             mouseY = e.originalEvent.touches[0].pageY - (height / 2)
           })
