@@ -10,6 +10,13 @@
         font-family: HelveticaNeue-UltraLight, Helvetica Neue, Arial, Helvetica, sans-serif;
         font-size: 24px;
       }
+      .canvas {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+      }
       .logo {
         position: absolute;
         top: 50px;
@@ -59,7 +66,7 @@
     <script src="js/three.min.js"></script>
     <script>
       $(function () {
-        $('.logo').mouseenter(function () {
+        $('.logo').on('mouseenter touchstart', function () {
           $({blurRadius: 0}).
             animate({blurRadius: 1}, {
               duration: 100,
@@ -128,8 +135,6 @@
         var renderer = new THREE.WebGLRenderer()
         renderer.setPixelRatio(window.devicePixelRatio)
 
-        var container = $('<div>').css({position: 'absolute', top: 0, right: 0, left: 0, bottom: 0}).append(renderer.domElement).prependTo('body')
-
         $(window).
           resize(function () {
             width = $('body')[0].scrollWidth
@@ -142,6 +147,8 @@
             renderer.setSize(width, height)
           }).
           resize()
+
+        $('.canvas').append(renderer.domElement)
 
         $('body').
           on('mousemove', function (e) {
@@ -178,6 +185,7 @@
     <title>Akura</title>
   </head>
   <body>
+    <div class="canvas"></div>
     <div class="logo"></div>
     <div class="content">
       <h1>Akura</h1>
