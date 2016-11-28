@@ -155,14 +155,7 @@
             mouseX = e.clientX - (width / 2)
             mouseY = e.clientY - (height / 2)
           }).
-          on('touchstart', function (e) {
-            if (!e.originalEvent.touches.length)
-              return
-            //e.preventDefault()
-            mouseX = e.originalEvent.touches[0].pageX - (width / 2)
-            mouseY = e.originalEvent.touches[0].pageY - (height / 2)
-          }).
-          on('touchmove', function (e) {
+          on('touchstart touchmove', function (e) {
             if (!e.originalEvent.touches.length)
               return
             //e.preventDefault()
