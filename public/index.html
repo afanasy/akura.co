@@ -72,13 +72,20 @@
             animate({blurRadius: 1}, {
               duration: 100,
               easing: 'swing',
-              step: function() {$('.logo').css('filter', 'blur(' + this.blurRadius + 'px)')}
+              step: function() {
+                $('.logo').css('filter', 'blur(' + this.blurRadius + 'px)')
+              }
             }).
             animate({blurRadius: 0}, {
               duration: 100,
               easing: 'swing',
-              step: function() {$('.logo').css('filter', 'blur(' + this.blurRadius + 'px)')}
-            })
+              step: function() {
+                $('.logo').css('filter', 'blur(' + this.blurRadius + 'px)')
+              },
+              complete: function () {
+                $('.logo').css('filter', '')}
+              }
+            )
         })
         var slogan = [
           'We make apps',
