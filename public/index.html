@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <style>
       body {
@@ -20,8 +21,11 @@
         background-size: 200px 200px;
       }
       .content {
+        position: absolute;
+        top: 300px;
+        left: 50%;
         width: 640px;
-        margin: 300px auto;
+        margin-left: -320px;
         text-align: center;
       }
       .subtitle {
@@ -51,7 +55,8 @@
         color: black;
       }
     </style>
-    <script src="jquery.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
     <script>
       $(function () {
         $('.logo').mouseenter(function () {
@@ -67,6 +72,107 @@
               step: function() {$('.logo').css('filter', 'blur(' + this.blurRadius + 'px)')}
             })
         })
+        var slogan = [
+          'We make apps',
+          'Apps matter',
+          'Digital production'
+        ]
+        $('.subtitle').text(slogan[Math.floor(Math.random() * slogan.length)])
+
+        var width
+        var height
+        var top = 150
+
+        var mouseX = 0
+        var mouseY = 0
+
+        var camera = new THREE.PerspectiveCamera()
+        camera.position.z = 1200
+
+        var scene = new THREE.Scene()
+        scene.background = new THREE.Color(0xffffff)
+        scene.fog = new THREE.FogExp2(0xffffff, 0.002)
+
+        var particles = 100000
+        var geometry = new THREE.BufferGeometry()
+        var positions = new Float32Array(particles * 3)
+        var colors = new Float32Array(particles * 3)
+        var color = new THREE.Color()
+        var n = 1200
+        for (var i = 0; i < positions.length; i += 3) {
+          var theta = Math.random() * 2 * Math.PI
+          var phi = Math.random() * 2 * Math.PI
+          var r = 100 + (2000 * Math.random())
+          var px = r * Math.cos(phi)
+          var py = r * Math.sin(phi)
+          var pz = Math.random() * n - (n / 2)
+          positions[i] = px
+          positions[i + 1] = py
+          positions[i + 2] = pz
+          var vx = (px / n) + 0.5
+          var vy = (py / n) + 0.5
+          var vz = (pz / n) + 0.5
+          color.setRGB(vx, vy, vz)
+          colors[i] = color.r
+          colors[i + 1] = color.g
+          colors[i + 2] = color.b
+        }
+        geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3))
+        geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3))
+        geometry.computeBoundingSphere()
+
+        var material = new THREE.PointsMaterial({size: 0,vertexColors: THREE.VertexColors})
+        points = new THREE.Points(geometry, material)
+        scene.add(points)
+
+        var renderer = new THREE.WebGLRenderer()
+        renderer.setPixelRatio(window.devicePixelRatio)
+
+        var container = $('<div>').css({position: 'absolute', top: 0, right: 0, left: 0, bottom: 0}).append(renderer.domElement).prependTo('body')
+
+        $(window).
+          resize(function () {
+            width = $(window).width()
+            height = $(window).height()
+            var fullHeight = 2 * (height - top)
+
+            camera.aspect = width / fullHeight
+            camera.setViewOffset(width, fullHeight, 0, height - 2 * top, width, height)
+            camera.updateProjectionMatrix()
+            renderer.setSize(width, height)
+          }).
+          resize()
+
+        $('body').
+          on('mousemove', function (e) {
+            mouseX = e.clientX - (width / 2)
+            mouseY = e.clientY - (height / 2)
+          }).
+          on('touchstart', function (e) {
+            if (e.originalEvent.touches.length != 1)
+              return
+            e.preventDefault()
+            mouseX = e.originalEvent.touches[0].pageX - (width / 2)
+            mouseY = e.originalEvent.touches[0].pageY - (height / 2)
+          }).
+          on('touchmove', function (e) {
+            if (e.originalEvent.touches.length != 1)
+              return
+            e.preventDefault()
+            mouseX = e.originalEvent.touches[0].pageX - (width / 2)
+            mouseY = e.originalEvent.touches[0].pageY - (height / 2)
+          })
+
+        var rotation = 0
+        function animate() {
+          requestAnimationFrame(animate)
+          camera.lookAt(scene.position)
+          rotation += .001
+          camera.rotation.z = rotation
+          material.size += ((200 * mouseX / width) - material.size) * 0.1
+          renderer.render(scene, camera)
+        }
+        animate()
       })
     </script>
     <title>Akura</title>
@@ -75,7 +181,7 @@
     <div class="logo"></div>
     <div class="content">
       <h1>Akura</h1>
-      <div class="subtitle">Apps matter</div>
+      <div class="subtitle"></div>
       <div class="social">
         <a class="fa-stack fa-lg" href="http://facebook.com/akura.co">
           <i class="fa fa-circle fa-stack-2x"></i>
