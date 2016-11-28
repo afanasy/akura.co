@@ -23,10 +23,10 @@
       .content {
         position: absolute;
         top: 300px;
-        left: 50%;
-        width: 640px;
-        margin-left: -320px;
+        left: 0px;
+        right: 0px;
         text-align: center;
+        margin-bottom: 40px;
       }
       .subtitle {
         font-size: 24px;
@@ -132,8 +132,8 @@
 
         $(window).
           resize(function () {
-            width = $(window).width()
-            height = $(window).height()
+            width = $('body')[0].scrollWidth
+            height = $('body')[0].scrollHeight
             var fullHeight = 2 * (height - top)
 
             camera.aspect = width / fullHeight
@@ -149,14 +149,14 @@
             mouseY = e.clientY - (height / 2)
           }).
           on('touchstart', function (e) {
-            if (e.originalEvent.touches.length != 1)
+            if (!e.originalEvent.touches.length)
               return
             e.preventDefault()
             mouseX = e.originalEvent.touches[0].pageX - (width / 2)
             mouseY = e.originalEvent.touches[0].pageY - (height / 2)
           }).
           on('touchmove', function (e) {
-            if (e.originalEvent.touches.length != 1)
+            if (!e.originalEvent.touches.length)
               return
             e.preventDefault()
             mouseX = e.originalEvent.touches[0].pageX - (width / 2)
