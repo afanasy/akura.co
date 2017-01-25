@@ -95,6 +95,9 @@
         ]
         $('.subtitle').text(slogan[Math.floor(Math.random() * slogan.length)])
 
+        if (navigator.userAgent.match(/MSIE/))
+          return
+
         var width
         var height
         var top = 150
