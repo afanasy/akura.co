@@ -4,7 +4,6 @@ var
   hsts = require('hsts'),
   bodyParser = require('body-parser'),
   forceDomain = require('forcedomain'),
-  api = require('./api'),
   app = module.exports = express()
 
 app.use(
@@ -12,8 +11,7 @@ app.use(
   hsts({maxAge: 86400}),
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
-  express.static(__dirname + '/public'),
-  api
+  express.static(__dirname + '/public')
 )
 
 _.each(require('solid-config').bot, function (bot) {
