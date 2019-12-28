@@ -17,3 +17,4 @@ app.use(
 _.each(require('solid-config').bot, function (bot) {
   app.use('/telegram/' + bot + '/hook', require('/home/ubuntu/' + bot)())
 })
+
