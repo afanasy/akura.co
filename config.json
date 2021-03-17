@@ -1,6 +1,9 @@
 {
-  "create": true,
-  "read": true,
-  "update": true,
-  "delete": true
+  "bot": [
+    "quote-bot",
+    "podskazka-bot",
+    "pogovorka-bot",
+    "hkd-bot",
+    "bin-bot"
+  ]
 }

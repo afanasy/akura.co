@@ -1,20 +1,20 @@
-var
-  _ = require('underscore'),
-  express = require('express'),
-  hsts = require('hsts'),
-  bodyParser = require('body-parser'),
-  forceDomain = require('forcedomain'),
-  app = module.exports = express()
+var _ = require('underscore')
+var express = require('express')
+var bodyParser = require('body-parser')
+var config = require('./config')
 
-app.use(
-  forceDomain({hostname: 'akura.co', protocol: 'https'}),
-  hsts({maxAge: 86400}),
-  bodyParser.json(),
-  bodyParser.urlencoded({extended: true}),
-  express.static(__dirname + '/public')
-)
+var app = module.exports = express().
+  use(
+    bodyParser.json(),
+    bodyParser.urlencoded({extended: true}),
+    express.static(__dirname + '/public')
+  )
 
-_.each(require('solid-config').bot, function (bot) {
-  app.use('/telegram/' + bot + '/hook', require('/home/ubuntu/' + bot)())
+_.each(config.bot, bot => {
+  try {
+    app.use('/telegram/' + bot + '/hook', require(__dirname + '/../' + bot)())
+  }
+  catch (e) {
+    console.log(e)
+  }
 })
-
