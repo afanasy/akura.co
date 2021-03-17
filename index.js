@@ -18,7 +18,7 @@ _.each(config.bot, bot => {
     if (setWebhook) {
       var token = require(__dirname + '/../.' + bot).token
       var hook = 'https://akura.co' + path
-      superagent.get('https://api.telegram.org/bot' + token + '/setWebhook').query({url: hook}).end((err, res) => {
+      superagent('https://api.telegram.org/bot' + token + '/setWebhook').query({url: hook}).end((err, res) => {
         if (err)
           return console.log('setWebhook', hook, err)
         console.log('setWebhook', hook, res.body)

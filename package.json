@@ -1,9 +1,6 @@
 {
   "name": "akura.co",
   "version": "1.5.16",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/akura-co/akura.co"
@@ -19,8 +16,5 @@
     "express": "4.17.1",
     "superagent": "6.1.0",
     "underscore": "1.12.1"
-  },
-  "engines": {
-    "node": "8.17.0"
   }
 }
